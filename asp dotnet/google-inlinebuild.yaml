@@ -1,0 +1,89 @@
+#some how this work for me
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: gym-management
+  namespace: '990987302306'
+  selfLink: /apis/serving.knative.dev/v1/namespaces/990987302306/services/gym-management
+  uid: f023a8cc-09f1-429a-92cb-3ebf98b6da8d
+  resourceVersion: AAYk2FDg02k
+  generation: 8
+  creationTimestamp: '2024-10-19T11:47:07.813432Z'
+  labels:
+    commit-sha: 1330f3ab51f4d36ee3926443740206aabf7e0b7b
+    gcb-build-id: a065a950-9b96-46f5-b17d-26a4e3755e67
+    gcb-trigger-id: a4220e9a-0c8d-4731-97cf-5cd70d7091cf
+    gcb-trigger-region: global
+    managed-by: gcp-cloud-build-deploy-cloud-run
+    cloud.googleapis.com/location: us-central1
+  annotations:
+    serving.knative.dev/creator: domocraft231@gmail.com
+    serving.knative.dev/lastModifier: 990987302306-compute@developer.gserviceaccount.com
+    run.googleapis.com/client-name: gcloud
+    run.googleapis.com/client-version: 497.0.0
+    run.googleapis.com/operation-id: de92ee68-a810-4e73-b9a5-a3a9ac179a4e
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+    run.googleapis.com/minScale: '1'
+    run.googleapis.com/urls: '["https://gym-management-990987302306.us-central1.run.app","https://gym-management-ysjll7zyfa-uc.a.run.app"]'
+spec:
+  template:
+    metadata:
+      labels:
+        client.knative.dev/nonce: llszlqkkic
+        commit-sha: 1330f3ab51f4d36ee3926443740206aabf7e0b7b
+        gcb-build-id: a065a950-9b96-46f5-b17d-26a4e3755e67
+        gcb-trigger-id: a4220e9a-0c8d-4731-97cf-5cd70d7091cf
+        gcb-trigger-region: global
+        managed-by: gcp-cloud-build-deploy-cloud-run
+        run.googleapis.com/startupProbeType: Default
+      annotations:
+        autoscaling.knative.dev/maxScale: '100'
+        run.googleapis.com/client-name: gcloud
+        run.googleapis.com/client-version: 497.0.0
+        run.googleapis.com/startup-cpu-boost: 'true'
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      serviceAccountName: 990987302306-compute@developer.gserviceaccount.com
+      containers:
+      - name: placeholder-1
+        image: us-central1-docker.pkg.dev/gym-project-439107/cloud-run-source-deploy/gym-management/gym-management:1330f3ab51f4d36ee3926443740206aabf7e0b7b
+        ports:
+        - name: http1
+          containerPort: 8080
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+        startupProbe:
+          timeoutSeconds: 240
+          periodSeconds: 240
+          failureThreshold: 1
+          tcpSocket:
+            port: 8080
+  traffic:
+  - percent: 100
+    latestRevision: true
+status:
+  observedGeneration: 8
+  conditions:
+  - type: Ready
+    status: 'True'
+    lastTransitionTime: '2024-10-19T18:09:08.711273Z'
+  - type: ConfigurationsReady
+    status: 'True'
+    lastTransitionTime: '2024-10-19T18:09:05.914726Z'
+  - type: RoutesReady
+    status: 'True'
+    lastTransitionTime: '2024-10-19T18:09:08.678097Z'
+  latestReadyRevisionName: gym-management-00007-f2h
+  latestCreatedRevisionName: gym-management-00007-f2h
+  traffic:
+  - revisionName: gym-management-00007-f2h
+    percent: 100
+    latestRevision: true
+  url: https://gym-management-ysjll7zyfa-uc.a.run.app
+  address:
+    url: https://gym-management-ysjll7zyfa-uc.a.run.app
