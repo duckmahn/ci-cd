@@ -1,0 +1,23 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+
+# Install clang/zlib1g-dev dependencies for publishing to native
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+    clang zlib1g-dev
+
+ARG BUILD_CONFIGURATION=Release
+
+WORKDIR /src
+COPY . ./
+
+RUN dotnet restore "/src/WarRoom/WarRoom.Web/WarRoom.Web.csproj"
+RUN dotnet publish "/src/WarRoom/WarRoom.Web/WarRoom.Web.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=true /p:ApiKind=BE
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 80
+FROM base AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+
+ENTRYPOINT ["dotnet", "WarRoom.Web.dll"]
